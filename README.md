@@ -6,4 +6,6 @@ RSA加密的内容长度有限，所以要么是只加密敏感内容，要么�
 
 参考
 http://www.justabug.net/door-1-rsa/    这个已经说得挺详细了，也解决了其中遇到的一些问题，但竟然也有部分是错的
+
+
 http://sunxboy.iteye.com/blog/209156   本demo使用到的js就是这里提供的
