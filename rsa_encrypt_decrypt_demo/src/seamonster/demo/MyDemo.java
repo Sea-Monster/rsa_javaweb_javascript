@@ -27,7 +27,7 @@ public class MyDemo {
 	@RequestMapping(method=RequestMethod.GET)
 	public String doGet(HttpServletRequest req, Model model){
 		try{
-			RSAUtils.generateKeyPair();	//生成公钥密钥对
+			
 			
 			//返回n和e到页面上，有这两个值就能得出公钥
 			model.addAttribute("n", RSAUtils.getModulus());

@@ -25,13 +25,14 @@ import org.bouncycastle.jce.provider.JCERSAPublicKey;
  */
 public class RSAUtils {
 	public static KeyPair KEY_PAIR = null;
+	private static BouncyCastleProvider bouncyCastleProvider = new BouncyCastleProvider();
 
 	/**
 	 * 生成公钥私钥
 	 */
 	public static KeyPair generateKeyPair() throws Exception {
 		try {
-			KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA", new BouncyCastleProvider());
+			KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA", bouncyCastleProvider);
 			final int KEY_SIZE = 1024;// 没什么好说的了，这个值关系到块加密的大小，可以更改，但是不要太大，否则效率会低
 			// final int KEY_SIZE = 4096;
 			keyPairGen.initialize(KEY_SIZE, new SecureRandom());
@@ -124,7 +125,7 @@ public class RSAUtils {
 	 */
 	private static byte[] encrypt(Key pk, byte[] data) throws Exception {
 		try {
-			Cipher cipher = Cipher.getInstance("RSA", new BouncyCastleProvider());
+			Cipher cipher = Cipher.getInstance("RSA", bouncyCastleProvider);
 			cipher.init(Cipher.ENCRYPT_MODE, pk);
 			int blockSize = cipher.getBlockSize();// 获得加密块大小，如：加密前数据为128个byte，而key_size=1024
 			// 加密块大小为127
@@ -162,7 +163,7 @@ public class RSAUtils {
 	 */
 	private static byte[] decrypt(Key pk, byte[] raw) throws Exception {
 		try {
-			Cipher cipher = Cipher.getInstance("RSA", new org.bouncycastle.jce.provider.BouncyCastleProvider());
+			Cipher cipher = Cipher.getInstance("RSA", bouncyCastleProvider);
 			cipher.init(Cipher.DECRYPT_MODE, pk);
 			int blockSize = cipher.getBlockSize();
 			ByteArrayOutputStream bout = new ByteArrayOutputStream(64);
